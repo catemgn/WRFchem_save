@@ -1,0 +1,37 @@
+
+####### INSTRUCTIONS FOR DOWNLOADING AND INSTALLING WRF-Chem #######
+
+Author: Caterina Mogno  c.mogno@ed.ac.uk
+Last update: 21/01/2020
+
+
+*PRIMARY SOURCE CODE AND DOCUMENTATION*
+WRF-Chem code, documentation, version updates, technical and  bugs fixing notes can be found inthe WRF Github repository: https://github.com/wrf-model.
+
+
+*OTHER USEFUL DOCUMENTATION*
+1) Compiling and installing tutorials:
+   http://www2.mmm.ucar.edu/wrf/OnLineTutorial/compilation_tutorial.php
+   http://www2.mmm.ucar.edu/wrf/OnLineTutorial/index.php
+ 
+2) WRF user page:
+   http://www2.mmm.ucar.edu/wrf/users/
+3) WRFChem website (includes links to  tutorials and forums):
+   https://ruc.noaa.gov/wrf/wrf-chem/
+4) WRF-Chem tools for the community (mainly preprocessors)
+   https://www2.acom.ucar.edu/wrf-chem/wrf-chem-tools-community
+      
+ 
+*DOWNLOAD*
+
+Clone direclty from the WRF Github repository https://github.com/wrf-model the latest version of the model.
+Create a folder call WRF-Chem. Go into it. From command line type:
+
+   $  git clone https://github.com/wrf-model/WRF
+   $  git clone https://github.com/wrf-model/WPS
+   
+*ENVIRONMENT TESTS AND INSTALLING LIBRARIES*
+Follow instructions of the first tutorial of 1). More infos in the README in folder MACHINE_TESTS and LIBRARIES.
+
+*WPS AND WRF-CHEM COMPILING*
+Follow instructions of the second tutorial of 1). More infos in the README in folders WPS and WRF.
