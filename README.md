@@ -18,8 +18,11 @@ Repository of important/useful files for running WRFchem. Includes:
     - setenvar.sh
     
 ## Set-up and run (useful files)
-    -METEO_README.txt
-    -camchem4bins.xlsx
+    - METEO_README.txt
+    - camchem4bins.xlsx
+    
+## Working configurations logs
+   - log_201 (dir)
 
     
 
