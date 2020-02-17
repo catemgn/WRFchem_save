@@ -1,6 +1,6 @@
 # WRFchem_save
 
-Repository of important/useful files for running WRFchem. Includes:
+Repository of important/useful files for running WRFchem (used version 4.1.2). It includes:
   - bash/shell scripts for WRFchem. 
   - README files
   - log of working configurations for WPS/WRF
