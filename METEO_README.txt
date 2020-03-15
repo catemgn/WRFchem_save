@@ -22,7 +22,7 @@ When receiving notiication that data are ready, selct Download options: csh down
 
 FOR RETRIVING DATA FROM CSH DOWNLOAD SCRIPT
 #
-csh download_CODENAME.csh pxr9MZZ6
+csh download_CODENAME.csh PASSWORD
 
 for  untar all:
 
