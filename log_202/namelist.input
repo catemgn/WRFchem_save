@@ -4,34 +4,35 @@
  run_minutes                         = 0,
  run_seconds                         = 0,
  start_year                          = 2017, 2017, 2017,
- start_month                         = 10, 10,   10,
- start_day                           = 11,  08,  08,
+ start_month                         = 11, 10,   10,
+ start_day                           = 01,  08,  08,
  start_hour                          = 00,  00,  00,
  start_minute                        = 00,  00,  00,
  start_second                        = 00,  00,  00,
  end_year                            = 2017,  2017,  2017,
- end_month                           = 11,  11,  11,
+ end_month                           = 11, 11,  11,
  end_day                             = 16,  16,  16,
  end_hour                            = 00,  00,  00,
  end_minute                          = 00,  00,  00,
  end_second                          = 00,  00,  00,
  interval_seconds                    = 21600,
  input_from_file                     = .true., .true., .true.,
- history_interval                    = 120,60,60,
- history_outname                     = '/scratch/local/s1878599/202_debug/wrfout_d<domain>_<date>',
- frames_per_outfile                  = 12,  1,  1,
- restart                             = .false.,
- restart_interval                    = 72000,
- write_hist_at_0h_rst		     = .false., 
- override_restart_timers	     = .false.,
+ history_interval                    = 180,60,60,
+ history_outname                     = '/geos/d21/s1878599/IGP/outputs/autumn/base/wrfout_d<domain>_<date>_ab.nc',
+ frames_per_outfile                  = 84,  1,  1,
+ restart                            = .true.,
+ restart_interval                   = 10080,
+ write_hist_at_0h_rst		     = .true., 
+ override_restart_timers	     = .true.,
  io_form_history                     = 2,
  io_form_restart                     = 2,
  io_form_input                       = 2,
  io_form_boundary                    = 2,
- auxinput5_inname 		      = 'wrfchemi_d<domain>_<date>',
+ auxinput5_inname 		     = 'wrfchemi_<hr>z_d<domain>',
  auxinput6_inname                    = 'wrfbiochemi_d<domain>',
  auxinput7_inname                    = 'wrffirechemi_d<domain>_<date>',
- auxinput5_interval_m                = 360,
+ auxinput5_interval_m                = 60,
+auxinput6_interval_m                 = 144000 !Read bioemi only at the beginning
  auxinput7_interval_m                = 60,
  frames_per_auxinput5 		      = 1,
  frames_per_auxinput7 		      = 1,
@@ -39,17 +40,20 @@
  io_form_auxinput6                   = 2,
  io_form_auxinput7                   = 2,
  force_use_old_data		      = .true., 
- debug_level                          = 9999,
-	 /
+ iofields_filename	              = 'iofields_d01.txt', 'iofields_d02.txt','iofields_d03.txt',
+ ignore_iofields_warning             = .true., 
+ debug_level                          = 99,
+/
 
  &domains
- time_step                           = 120,
+ time_step                           = 60, ! 3dx. On mountain regions < 6dx.
  time_step_fract_num                 = 0,
  time_step_fract_den                 = 1,
  max_dom                             = 1,
- e_we                                = 170, !110,  136,  151,
+ e_we                                = 160, !110,  136,  151,
  e_sn                                = 120, !110 136,  151,  
  e_vert                              = 33, 40, 40,
+ p_top_requested                     = 5000, !Pa
  num_metgrid_levels                  = 32,
  num_metgrid_soil_levels             = 4,
  dx                                  = 20000, !25000,  5000,  1000,
@@ -60,9 +64,8 @@
  j_parent_start                      = 1, 40,  60,
  parent_grid_ratio                   = 1, 5,   5,
  parent_time_step_ratio              = 1, 5,   5,
- feedback                            = 1,
- auto_levels_opt                     = 2, 
- /
+ auto_levels_opt                     = 2, ! 2 is new vertical sigma hybrid coord. from v4.0. 
+/
  
 
  &physics
@@ -72,20 +75,16 @@
  ra_lw_physics                       = 4, 4, 4,
  ra_sw_physics                       = 4, 4, 4,
  radt                                = 30, 30, 30,
- sf_sfclay_physics                   = 2, 2, 2,
- sf_surface_physics                  = 2, 2, 2,
- bl_pbl_physics                      = 2, 2, 2,
+ sf_sfclay_physics                   = 5, 2, 2, !MYNN
+ sf_surface_physics                  = 2, 2, 2, !Noah LSM
+ bl_pbl_physics                      = 5, 5, 5,
  bldt                                = 0, 0, 0,
  cu_physics                          = 5, 0, 0, !turn off for res of few km.
- cu_diag                             = 1, 0, 0,
- cudt                                = 0, 0, 0,
- ishallow                            = 0,
  isfflx                              = 1,
- ifsnow                              = 1,
  icloud                              = 1,
- surface_input_source                = 1,
+ surface_input_source                = 3,
  num_soil_layers                     = 4,
- sf_urban_physics                    = 2, 2, 2,
+ sf_urban_physics                    = 0,! with Noah LSM it is Urban canopy model.
  mp_zero_out                         = 2,
  mp_zero_out_thresh                  = 1.e-8,
  cu_rad_feedback                     = .true., .false., .false.,
@@ -97,9 +96,9 @@
  gfdda_inname                         = "wrffdda_d<domain>",
  gfdda_end_h                          =1200,
  gfdda_interval_m                    = 360, !in mins.
- if_no_pbl_nudging_uv                = 1,   ! 1 = no nudge in the PBL.
- if_no_pbl_nudging_t                 = 1,
- if_no_pbl_nudging_q                 = 1,
+ if_no_pbl_nudging_uv                = 0,   ! 1 = no nudge in the PBL.
+ if_no_pbl_nudging_t                 = 0,
+ if_no_pbl_nudging_q                 = 0,
  guv                                 = 0.0006,
  gt                                  = 0.0006,
  gq                                 = 0.0006,
@@ -108,7 +107,7 @@
 
 
  &dynamics
- hybrid_opt                          = 2,	
+ hybrid_opt                          = 2, !2 = new hybrid vertical coords.	
  tracer_opt                          = 0, 
  w_damping                           = 1,
  diff_opt                            = 1,1,1, 
@@ -149,8 +148,8 @@
  chem_opt                            = 202, 202, 202,
  bioemdt                             = 30,30,30,
  photdt                              = 30.,30., 30.,
- chemdt                              = 0,0,0,
- io_style_emissions                  = 2,
+ chemdt                              = 5,0,0,
+ io_style_emissions                  = 1, !wrfchemi 12h files.
  emiss_inpt_opt                      = 102,
  emiss_opt                           = 10,
  chem_in_opt                         = 1, !set to 1 when running wrf.exe for reading BC,but  0 when running real.exe.
@@ -168,7 +167,7 @@
  aer_bc_opt                          = 1,1,1,
  aer_ic_opt                          = 1,1,1,
  aer_op_opt                          = 1,
- gaschem_onoff                        = 1,1,1,
+ gaschem_onoff                       = 1,1,1,
  aerchem_onoff                       = 1,1,1,
  wetscav_onoff                       = 1,1,1,
  cldchem_onoff                       = 1,0,0, !1 for 202 - 0 for 201
@@ -177,10 +176,10 @@
  conv_tr_wetscav                     = 1,1,1,
  conv_tr_aqchem                      = 1,0,0, !1 for 202 - 0 for 201
  seas_opt                            = 2,
- dust_opt                            = 3,
+ dust_opt                            = 13, ! new option for MOZART-MOSAIC is 13, not 3.
  dmsemis_opt                         = 1,
  biomass_burn_opt                    = 2,2,2,
- plumerisefire_frq                   = 120,120,120, !same time step as meteorology.
+ plumerisefire_frq                   = 60,120,120, !same time step as meteorology.
  scale_fire_emiss                    = .true., .true., .true.,
  aer_ra_feedback                     = 1,1,1,
  ne_area                             = 364,
